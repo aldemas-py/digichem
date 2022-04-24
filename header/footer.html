@@ -14,7 +14,7 @@
 </div>
 
 <style>
-    #footer {
+    .footer {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -23,7 +23,7 @@
         min-width: 10px;
         justify-content: space-between;
         border-top: solid 3px grey;
-        box-shadow: 2px 2px 35px 2px #8a8a1d;
+        box-shadow: 2px 2px 30px 2px #8a8a1d;
         padding: 12px 28px;
         font-weight: 700;
         font-size: large;
@@ -35,5 +35,15 @@
         margin-right: 38px;
         text-decoration: none;
         color: black;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .footer {
+            font-size: small;
+            padding: 2px;
+            border-top: none;
+            box-shadow: none;
+            flex-direction: column;
+        }
     }
 </style>
