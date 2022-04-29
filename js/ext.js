@@ -10,10 +10,10 @@ $(document).ready(function () {
     obj.height = obj.css("height", pgheight * 0.7);
     // footer
     footerAlign();
-    $(".footer").html(htmlString);
-});
-$(window).resize(function () {
-    footerAlign();
+    // $(".footer").html(htmlString);
+    $(window).resize(function () {
+        footerAlign();
+    });
 });
 // Navbar
 const nav = document.querySelector(".navbar");
