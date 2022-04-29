@@ -10,7 +10,7 @@ $(document).ready(function () {
     obj.height = obj.css("height", pgheight * 0.7);
     // footer
     footerAlign();
-    // $(".footer").html(htmlString);
+    $(".footer").html(htmlString);
 });
 $(window).resize(function () {
     footerAlign();
@@ -38,3 +38,45 @@ fetch("header/footer.html")
     .then((data) => {
         foot.innerHTML = data;
     });
+document.addEventListener("DOMContentLoaded", function (event) {
+    var element = document.getElementById('body');
+    var height = element.offsetHeight;
+    if (height < screen.height) {
+        document.getElementById("footer").classList.add('stikybottom');
+    }
+}, false);
+
+// contact page
+$(':submit').click(function () {
+    $(this).attr('value', 'Please wait...');
+})
+
+function validateForm() {
+    var name = document.getElementById('user').value;
+    if (name == "") {
+        document.querySelector('.status').innerHTML = "Name cannot be empty";
+        return false;
+    }
+    var email = document.getElementById('email').value;
+    if (email == "") {
+        document.querySelector('.status').innerHTML = "Email cannot be empty";
+        return false;
+    } else {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!re.test(email)) {
+            document.querySelector('.status').innerHTML = "Email format invalid";
+            return false;
+        }
+    }
+    var subject = document.getElementById('subject').value;
+    if (subject == "") {
+        document.querySelector('.status').innerHTML = "Subject cannot be empty";
+        return false;
+    }
+    var message = document.getElementById('message').value;
+    if (message == "") {
+        document.querySelector('.status').innerHTML = "Message cannot be empty";
+        return false;
+    }
+    document.querySelector('.status').innerHTML = "Sending...";
+}
