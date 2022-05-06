@@ -1,6 +1,7 @@
 <?php
 require 'core.inc.php';
 
+// login form
 session_start();
 
 if (isset($_SESSION['user_id']) != "") {

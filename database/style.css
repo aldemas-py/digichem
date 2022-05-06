@@ -1,3 +1,69 @@
+/* GLOBAL */
+* {
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
+    text-align: center;
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+    font-size: 15px;
+    height: fit-content;
+    background-image: url('../images/bg1.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+}
+
+.body {
     color: black;
+}
+
+.container {
+    padding: 25px;
+    position: fixed;
+}
+
+.form-login {
+    background-color: #EDEDED;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border-color: #d2d2d2;
+    border-width: 5px;
+    box-shadow: 0 1px 0 #cfcfcf;
+}
+
+h4 {
+    border: 0 solid #fff;
+    border-bottom-width: 1px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.form-control {
+    border-radius: 10px;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.centered-form {
+    margin-top: 60px;
+}
+
+.centered-form .panel {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+
+.lable {
+    text-align: left;
+    background: rgba(255, 255, 255, 0.8);
 }
