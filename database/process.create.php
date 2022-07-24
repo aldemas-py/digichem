@@ -5,7 +5,7 @@
 //     header("Location: \..\login.php");
 //     exit();
 // }
-require 'core.inc.php';
+require_once 'core.inc.php';
 if (isset($_POST['submit'])) {
     $surname = mysqli_real_escape_string($mysqli, $_POST['surname']);
     $otherName = mysqli_real_escape_string($mysqli, $_POST['otherNames']);
@@ -14,13 +14,10 @@ if (isset($_POST['submit'])) {
     $idNumber = mysqli_real_escape_string($mysqli, $_POST['idNumber']);
     $phone = mysqli_real_escape_string($mysqli, $_POST['phoneNumber']);
     $username = mysqli_real_escape_string($mysqli, $_POST['username']);
-    $password = mysqli_real_escape_string($mysqli, $_POST['password']);
-    $cpassword = mysqli_real_escape_string($mysqli, $_POST['password_hash']);
-    $employeeIdObj = mysqli_fetch_object(mysqli_query($mysqli, "SELECT id FROM employees WHERE surname = '" . $surname . "'"));
-    $employeeId = $employeeIdObj->id;
+    $password = md5(mysqli_real_escape_string($mysqli, $_POST['password']));
+    $cpassword = md5(mysqli_real_escape_string($mysqli, $_POST['password_hash']));
     $securityLevel = mysqli_real_escape_string($mysqli, $_POST['UserLevel']);
     $employeestatus = mysqli_real_escape_string($mysqli, 1);
-
     if (!preg_match("/^[a-zA-Z ]+$/", $username)) {
         $name_error = "Name must contain only alphabets and space";
     }
@@ -42,24 +39,35 @@ if (isset($_POST['submit'])) {
     if ($password != $cpassword) {
         $cpassword_error = "Password and Confirm Password doesn't match";
     }
-    if ((mysqli_query($mysqli, "INSERT INTO employees(surname, otherNames, email,securityKey, idNumber, phone) VALUES('" . $surname . "', '" . $otherName . "','" . $email . "', '" . $securityKey . "', '" . $idNumber . "', '" . $phone . "')"))) {
-        if ((mysqli_query($mysqli, "INSERT INTO useraccounts(username, password, employeeId, securityLevel, active) VALUES('" . $username . "', '" . md5($password) . "',, '" . $employeeId . "' '" . $securityLevel . "', '" . $employeestatus . "')"))) {
-            $to = $_POST['email'];
-            $from = 'Njengasam2406@gmail.com';
-            $message = 'Thank you for creating an account with us ' . $surname . ' ' . $otherName;
+    $userIdNumberObj = mysqli_fetch_object(mysqli_query($mysqli, "SELECT * FROM employees WHERE idNumber = '" . $idNumber . "'"));
+    $userIdNumber = $userIdNumberObj->idNumber;
+    if ($userIdNumber != $idNumber) {
+        $queryInsert1 = mysqli_query($mysqli, "INSERT INTO employees(surname, otherNames, email,securityKey, idNumber, phone) VALUES('" . $surname . "', '" . $otherName . "','" . $email . "', '" . $securityKey . "', '" . $idNumber . "', '" . $phone . "')");
 
-            // send email
-            mail($to, "My subject", $message);
-            header("location: createacc.php");
-            exit();
+        if ($queryInsert1) {
+            $employeeIdObj = mysqli_fetch_object(mysqli_query($mysqli, "SELECT id FROM employees WHERE surname = '" . $surname . "'"));
+            $employeeId = $employeeIdObj->id;
+
+            if (!empty($employeeId)) {
+                $queryInsert2 = mysqli_query($mysqli, "INSERT INTO useraccounts(username, pass, employeeId, SecurityLevel, active) VALUES('" . $username . "', '" . $password . "', '" . $employeeId . "', '" . $securityLevel . "', '" . $employeestatus . "')");
+                if ($queryInsert2) {
+                    $to = $_POST['email'];
+                    $from = 'Njengasam2406@gmail.com';
+                    $message = 'Thank you for creating an account with us ' . $surname . ' ' . $otherName;
+
+                    // send email
+                    mail($to, "My subject", $message);
+                    header("Location: ../dashboard.php");
+                    exit();
+                }
+            }
         }
+        mysqli_close($mysqli);
     } else {
-        echo "Error: " . " " . mysqli_error($mysqli);
+        header("Location: ../dashboard.php");
+        echo '<script type="text/JavaScript">alert("User already exists");</script>';
     }
-
-    mysqli_close($mysqli);
 }
-
 if (isset($_POST["indexPage"])) {
     ob_start();
     session_start();

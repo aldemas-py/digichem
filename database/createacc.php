@@ -32,48 +32,56 @@
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <input type="text" name="surname" id="surnamr" class="form-control input-sm" placeholder="Surname">
+                                            <input type="text" name="surname" id="surnamr" class="form-control input-sm"
+                                                placeholder="Surname">
                                         </div>
                                     </div>
                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <input type="text" name="otherNames" id="otherNames" class="form-control input-sm" placeholder="Other Names">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" name="username" id="username" class="form-control input-sm" placeholder="Username">
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                                            <input type="text" name="otherNames" id="otherNames"
+                                                class="form-control input-sm" placeholder="Other Names">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <input type="text" placeholder="ID Number" id="idNumber" name="idNumber" class="form-control input-sm">
+                                            <input type="text" name="username" id="username"
+                                                class="form-control input-sm" placeholder="Username">
                                         </div>
                                     </div>
                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Phone Number" id="phoneNumber" name="phoneNumber" class="form-control input-sm">
+                                            <input type="email" name="email" id="email" class="form-control input-sm"
+                                                placeholder="Email Address">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                                            <input type="text" placeholder="ID Number" id="idNumber" name="idNumber"
+                                                class="form-control input-sm">
                                         </div>
                                     </div>
                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <input type="password" name="password_hash" id="password_hash" class="form-control input-sm" placeholder="Confirm Password">
+                                            <input type="text" placeholder="Phone Number" id="phoneNumber"
+                                                name="phoneNumber" class="form-control input-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <input type="password" name="password" id="password"
+                                                class="form-control input-sm" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <input type="password" name="password_hash" id="password_hash"
+                                                class="form-control input-sm" placeholder="Confirm Password">
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +99,8 @@
                                     </div>
                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                         <div class="form-group">
-                                            <select name="employeestatus" id="employeestatus" class="form-control input-sm">
+                                            <select name="employeestatus" id="employeestatus"
+                                                class="form-control input-sm">
                                                 <option value="0">Status</option>
                                                 <option value="1">Active</option>
                                                 <option value="0">Inactive</option>

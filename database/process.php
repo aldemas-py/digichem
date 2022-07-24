@@ -1,5 +1,5 @@
 <?php
-require 'core.inc.php';
+require_once 'core.inc.php';
 
 // login form
 session_start();
@@ -15,23 +15,35 @@ if (isset($_POST['submit'])) {
     }
     $password = mysqli_real_escape_string($mysqli, $_POST['password']);
     if (!($password)) {
+        $_SESSION['user_err_pass'] = "err";
+        header("Location: ../login.php");
     }
-    $_SESSION['user_err_pass'] = "err";
-    header("Location: ../login.php");
-
-    $result = mysqli_query($mysqli, "SELECT * FROM users WHERE username = '" . $user . "' and password = '" . $password . "'");
-    if (!empty($result)) {
-        if ($row = mysqli_fetch_array($result)) {
-            $_SESSION['user_id'] = $row['uid'];
+    $password = md5($password);
+    $result1 = mysqli_query($mysqli, "SELECT * FROM useraccounts WHERE username = '" . $user . "' and pass = '" . $password . "'");
+    if (!empty($result1)) {
+        if ($row = mysqli_fetch_array($result1)) {
+            $userid = $_SESSION['user_id'] = $row['employeeId'];
             $_SESSION['user_name'] = $row['username'];
-            $_SESSION['user_email'] = $row['email'];
-            $_SESSION['user_mobile'] = $row['mobile'];
-            header("Location: ../dashboard.php");
+            $result2 = mysqli_query($mysqli, "SELECT * FROM employees WHERE id = '" . $userid . "'");
+            if (!empty($result2)) {
+                if ($row = mysqli_fetch_array($result2)) {
+                    $_SESSION['user_email'] = $row['email'];
+                    $_SESSION['user_mobile'] = $row['phone'];
+                    echo "sucessc";
+                    header("Location: ../dashboard.php");
+                } else {
+                    echo "error getting data from employees table";
+                }
+            } else {
+                echo "Error2: " . " " . mysqli_error($mysqli);
+            }
         } else {
-            $_SESSION['user_login'] = "err";
-            header("Location: ../login.php");
+            echo "error getting data from user table";
         }
     } else {
-        $error_message = "Incorrect Email or Password!!!";
+        echo "Error1: " . " " . mysqli_error($mysqli);
     }
+} else {
+    $_SESSION['user_login'] = "err";
+    header("Location: ../login.php");
 }

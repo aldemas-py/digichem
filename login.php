@@ -11,47 +11,49 @@ include "database/err.handle.php";
     <title>Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
-        // submit form
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
+    // submit form
 
-        // document.getElementById('status').innerHTML = "Sending...";
-        formData = {
-            'name': $('input[name=username]').val(),
-            'password': $('input[name=password]').val()
-        };
+    // document.getElementById('status').innerHTML = "Sending...";
+    formData = {
+        'username': $('input[name=username]').val(),
+        'password': $('input[name=password]').val()
+    };
 
-        $.ajax({
-            url: "database/process.php",
-            type: "POST",
-            data: formData,
-            success: function(data, textStatus, jqXHR) {
+    $.ajax({
+        url: "database/process.php",
+        type: "POST",
+        data: formData,
+        success: function(data, textStatus, jqXHR) {
 
-                $('#status').text(data.message);
-                if (data.code) //If login was successful, reset the form.
-                    $('#loginForm').closest('form').find("input[type=text], input[type=password]")
-                    .val("");
-                $('#loginForm').closest('form').find("input[type=submit]")
-                    .val("Submit");
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                $('#status').text(jqXHR);
-            }
-        });
+            $('#status').text(data.message);
+            if (data.code) //If login was successful, reset the form.
+                $('#loginForm').closest('form').find("input[type=text], input[type=password]")
+                .val("");
+            $('#loginForm').closest('form').find("input[type=submit]")
+                .val("Submit");
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $('#status').text(jqXHR);
+        }
+    });
     </script>
     <style>
-        body {
-            background-image: url('images/bg1.jpg');
-            background-position: center;
-            background-size: cover;
-            position: relative;
-        }
+    body {
+        background-image: url('images/bg1.jpg');
+        background-position: center;
+        background-size: cover;
+        position: relative;
+    }
 
-        .navbar {
-            background-color: rgba(0, 0, 0, 0.61);
-            backdrop-filter: blur(100px);
-        }
+    .navbar {
+        background-color: rgba(0, 0, 0, 0.61);
+        backdrop-filter: blur(100px);
+    }
     </style>
 </head>
 
@@ -60,7 +62,8 @@ include "database/err.handle.php";
         <div class="login">
             <nav class="navbar" id="myNavbar"> </nav>
             <div class="content">
-                <form action="database/process.php" method="post" id="loginForm" name="loginForm" onsubmit="return validateMyForm()">
+                <form action="database/process.php" method="post" id="loginForm" name="loginForm"
+                    onsubmit="return validateMyForm()">
                     <div id="myform">
 
                         <input type="textbox" placeholder="User name" name="username" id="username" />
